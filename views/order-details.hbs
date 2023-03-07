@@ -1,0 +1,208 @@
+<section class="h-50" style="background-color:">
+  <div class="container h-100 py-5 p-5 mt-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-10 pt-5">
+        
+       
+        {{#ifCheck status 'placed'}}
+        <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
+              <li class="step0 active fw-bold" id="step1"><span
+                  style="margin-left: 22px; margin-top: 12px;">PLACED</span></li>
+              <li class="step0  text-center text-muted" id="step2"><span>SHIPPED</span></li>
+              <li class="step0  text-muted text-end" id="step3"><span
+                  style="margin-right: 22px;">DELIVERED</span></li>
+            </ul>
+        {{/ifCheck}}
+
+         {{#ifCheck status 'pending'}}
+        <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
+              <li class="step0 " id="step1"><span
+                  style="margin-left: 22px; margin-top: 12px;">PENDING</span></li>
+              <li class="step0  text-center" id="step2"><span>PLACED</span></li>
+              <li class="step0  text-muted text-end" id="step3"><span
+                  style="margin-right: 22px;">SHIPPED</span></li>
+            </ul>
+        {{/ifCheck}}
+
+         {{#ifCheck status 'cancelled'}}
+       <div id="cancelled">
+
+         <ul id="progressbar-1"   class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
+              <li class="step0 text-muted"  id="step1"><span
+                  style="margin-left: 22px; margin-top: 12px;text-decoration:line-through;text-decoration-color:red;text-decoration-thickness: 2px;">PLACED</span></li>
+              <li class="step0 a text-center text-muted" id="step2"><span style="text-decoration:line-through;text-decoration-color:red;text-decoration-thickness: 2px;">SHIPPED</span></li>
+              <li class="step0 active  text-end fw-bold fs-6 text-danger" id="step3"><span
+                  style="margin-right: 22px;">CANCELLED</span></li>
+            </ul>
+
+       </div>
+       
+        {{/ifCheck}}
+
+
+        {{#ifCheck status 'shipped'}}
+        <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
+              <li class="step0 active" id="step1"><span
+                  style="margin-left: 22px; margin-top: 12px;">PLACED</span></li>
+              <li class="step0 active text-center fw-bold" id="step2"><span>SHIPPED</span></li>
+              <li class="step0  text-muted text-end" id="step3"><span
+                  style="margin-right: 22px;">DELIVERED</span></li>
+            </ul>
+        {{/ifCheck}}
+
+         {{#ifCheck status 'deliverd'}}
+        <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
+              <li class="step0 active" id="step1"><span
+                  style="margin-left: 22px; margin-top: 12px;">PLACED</span></li>
+              <li class="step0 active text-center text-muted " id="step2"><span>SHIPPED</span></li>
+              <li class="step0 active  text-end fw-bold" id="step3"><span
+                  style="margin-right: 22px;">DELIVERED</span></li>
+            </ul>
+        {{/ifCheck}}
+        
+
+        {{#ifCheck status 'returned'}}
+        <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
+              <li class="step0 " id="step1"><span
+                  style="margin-left: 22px; margin-top: 12px;">SHIPPED</span></li>
+              <li class="step0  text-center text-muted " id="step2"><span>DELIVERED</span></li>
+              <li class="step0 active text-danger text-end fw-bold" id="step3"><span
+                  style="margin-right: 22px;">RETURNED</span></li>
+            </ul>
+        {{/ifCheck}}
+
+
+       
+        </div> 
+
+       {{#each products}}
+         <div class="card rounded-3 mb-4 mt-3">
+          <div class="card-body p-4">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="col-md-2 col-lg-2 col-xl-2">
+                <img
+                  src="{{this.productDetails.image.[0]}}"
+                  class="img-fluid rounded-3" alt="">
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                <p class="lead fw-normal mb-2">{{this.productDetails.name}}</p>
+                <p><span class="text-muted">Category: </span>{{this.productDetails.category}} </p>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 d-flex"> 
+                 
+
+             <p>quantity<span><input id="form1" min="0" name="quantity" value="{{this.quantity}}"  type="text"
+                  class="form-control form-control-sm" /> </span> </p> 
+
+                 
+               </div>
+             
+            
+             
+              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+               {{!-- <h5 class="mb-0">{{this.productDetails.price}}</h5> --}}
+              <p><span class="text-muted">per product: </span>{{this.productDetails.price}} </p>
+             
+              </div>
+             
+             <div class="col-md-1 col-lg-1 col-xl-1text-end">
+              
+              </div>
+             
+              <div class="col-md-1 col-lg-1 col-xl-1text-end">
+            
+             
+             
+            
+          
+             
+             
+             
+              </div>
+            </div>
+          </div>
+        </div> 
+ 
+       {{/each}}  
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #progressbar-1 {
+color: #455A64;
+}
+
+#progressbar-1 li {
+list-style-type: none;
+font-size: 13px;
+width: 33.33%;
+float: left;
+position: relative;
+}
+
+#progressbar-1 #step1:before {
+content: "1";
+color: #fff;
+width: 29px;
+margin-left: 22px;
+padding-left: 11px;
+}
+
+#progressbar-1 #step2:before {
+content: "2";
+color: #fff;
+width: 29px;
+}
+
+#progressbar-1 #step3:before {
+content: "3";
+color: #fff;
+width: 29px;
+margin-right: 22px;
+text-align: center;
+}
+
+#progressbar-1 li:before {
+line-height: 29px;
+display: block;
+font-size: 12px;
+background: #455A64;
+border-radius: 50%;
+margin: auto;
+}
+
+#progressbar-1 li:after {
+content: '';
+width: 121%;
+height: 2px;
+background: #455A64;
+position: absolute;
+left: 0%;
+right: 0%;
+top: 15px;
+z-index: -1;
+}
+
+#progressbar-1 li:nth-child(2):after {
+left: 50%
+}
+
+#progressbar-1 li:nth-child(1):after {
+left: 25%;
+width: 121%
+}
+
+#progressbar-1 li:nth-child(3):after {
+left: 25%;
+width: 50%;
+}
+
+#progressbar-1 li.active:before,
+#progressbar-1 li.active:after {
+background: #1266f1;
+}
+
+</style>

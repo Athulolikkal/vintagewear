@@ -1,0 +1,353 @@
+<div class="container-fluid admin_sidebar ">
+    <div class="wrapper">
+        <div class="side_bar">
+            <div class="side_bar_top">
+                <div class="logo_wrap ">
+                    <a href="#" class="text-decoration-none">
+                        <img src="/images/_Pngtree_shopping_bag_icon_for_your_5201340-removebg-preview (2).png"
+                            alt="logo">
+
+                    </a>
+
+                </div>
+                <div class="side_bar_menu">
+                    <div class="menu">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="side_bar_bottom">
+                <ul>
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/admindashboard" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span class="item">Dashboard</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminuserslist" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                            <span class="item">Users</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminorders" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="reorder-three-outline"></ion-icon></span>
+                            <span class="item">Orders</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminproduct" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="pricetags-outline"></ion-icon></span>
+                            <span class="item">Products</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/admincategory" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="grid-outline"></ion-icon></span>
+                            <span class="item">Category</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li >
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminreport" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="newspaper-outline"></ion-icon></ion-icon></span>
+                            <span class="item">Report</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/admincoupon" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
+                            <span class="item">Coupon</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li class="active">
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminoffer" class="text-decoration-none">
+                    <span class="icon"><i class="bi bi-clock"></i></span>
+                    <span class="item p-1 mt-2">Offer</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminlogout" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                            <span class="item">Logout</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+
+
+
+
+<div class="main_container">
+
+
+
+
+<div class="background pb-3" style="
+    width: 90%;">
+    <div>
+        <a class="navbar-brand mt-4" style="font-family: none; font-weight: 900; color: black;">
+            <h1 class="text-center pt-5">Offers</h1>
+        </a>
+    </div>
+    <div class="d-flex" style="margin-left:5%;">
+
+        <div class="col-4 me-5 mt-4" style="width:50%;">
+            <div class="d-flex mb-2">
+                <h4 class=""><strong>Product Offer</strong></h4>
+             
+            
+             
+             
+                <button type="button" class="btn btn-outline-secondary ms-auto" data-bs-toggle="modal"
+                    data-bs-target="#product-offer" data-bs-whatever=" @mdo"><i class="fa-solid fa-plus"></i>&nbsp;add product offer </button>
+            </div>
+            <table class="table table-bordered" style="">
+                <thead  style="background-color:#8c31aa">
+                    <tr class="text-light">
+                        <th scope="col" class="text-center">Product</th>
+                        <th scope="col" class="text-center">Offer in %</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                  
+              {{#each products}}
+                    <tr>
+                         {{#if this.productoffer}}
+                        <td class="text-center">{{this.name}}</td>
+                        <td class="text-center">{{this.productoffer}}%</td>
+                        <td class="text-center">
+                           
+                         <a href="/admin/deleteproductoffer/{{this._id}}"><i class="bi bi-trash-fill"></i></a>  </td>
+                           
+                           {{/if}} 
+                            {{!-- <button type="button" class="btn btn-outline-danger"></button> Remove<i class="bi bi-trash-fill"></i></button></td> --}}
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-4 me-5  mt-4" style="width:50%;">
+            <div class="d-flex mb-2">
+                <h4 class=""><strong>Category Offer</strong></h4>
+                <button type="button" class="btn btn-outline-secondary ms-auto" data-bs-toggle="modal"
+                    data-bs-target="#category-offer" data-bs-whatever=" @mdo"><i class="fa-solid fa-plus"></i>&nbsp; Add
+                    Category
+                    Offer</button>
+            </div>
+            <table class="table table-bordered" style="">
+                <thead style="background-color:#8c31aa">
+                    <tr class="text-light">
+                        <th scope="col" class="text-center">Category</th>
+                        <th scope="col" class="text-center">Offer in %</th>
+                        <th scope="col" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                  {{#each category}}
+                
+                    <tr>
+                       {{#if this.categoryoffer}}
+                        <td class="text-center">{{this.name}}</td>
+                        <td class="text-center">{{this.categoryoffer}}%</td>
+                        <td class="text-center">
+                           
+                            <a href="/admin/deletecategoryoffer/{{this._id}}"><i class="bi bi-trash-fill"></i></a> 
+                           
+                            {{!-- <button type="button" class="btn btn-outline-danger">Remove</button> --}}
+                        </td>
+                   {{/if}}
+                    </tr>
+                             
+                  {{/each}}
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{{!-- product modal --}}
+
+<div class="modal fade" id="product-offer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+                <h5 class="modal-title text-center fw-bold" id="exampleModalLabels">Add product Offer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/add-product-offer" id="addProductOffer" method="post"
+                    class="needs-validation" novalidate>
+                    <div class=" mb-3">
+                        <select class="form-select" id="product-offer" name="product" required>
+                            <option selected>Choose the Product</option>
+                            {{#each products}}
+                            <option value={{this._id}}>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" id="product-offer" name="productOffer"
+                            placeholder="Enter Offer in Percentage" required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">submit</button>
+                    </div>
+                </form>
+            </div>
+      
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{{!-- category modal --}}
+
+<div class="modal fade" id="category-offer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+<div class="modal-header">
+                <h5 class="modal-title text-center fw-bold" id="exampleModalLabel">Add Category Offer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/add-category-offer" id="addCategoryOffer" method="post"
+                    class="needs-validation" novalidate>
+                    <div class=" mb-3">
+                        <select class="form-select" id="product-offer" name="category" required>
+                            <option selected>Choose the Category</option>
+                            {{#each category}}
+                            <option value={{this._id}}>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" id="product-offer" name="categoryOffer"
+                            placeholder="Enter Offer in Percentage" required>
+                    </div>
+                      
+
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">submit</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+
+<script>
+
+$('#addProductOffer').submit((e)=>{
+  e.preventDefault ()
+  $.ajax({
+
+   url:'/admin/add-product-offer',
+   method:'post',
+    data:$('#addProductOffer').serialize(),
+    success:(response)=>{
+        location.reload();
+    }
+
+  })
+})
+
+
+$('#addCategoryOffer').submit((e)=>{
+  e.preventDefault ()
+  $.ajax({
+
+   url:'/admin/add-category-offer',
+   method:'post',
+    data:$('#addCategoryOffer').serialize(),
+    success:(response)=>{
+        location.reload();
+    }
+
+  })
+})
+
+
+
+
+
+
+
+</script>

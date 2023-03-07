@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-6 m-auto">
+    <div class="container mt-5 pl-5">
+      <h2 class="text-center fw-bold">Add Users</h2>
+      {{!-- {{#if error}}
+      <p>invalid </p>
+      {{else}}
+
+      {{/if}} --}}
+      {{#if insertError}}
+        <p class="text-danger text-center ">invalid Email</p>
+       {{else}}
+      
+       {{/if}}
+      <form action="/admin/insertuser" method="post">
+
+        <div class="from-group">
+
+          <label class="pt-2">User Name</label>
+          <input type="name" class="form-control mt-2" name="fname" placeholder="User Name" required="">
+
+        </div>
+
+
+
+        <div class="from-group">
+
+          <label class="pt-2">User Email</label>
+          <input type="email" class="form-control" name="email" placeholder="User Email" required="">
+
+        </div>
+
+        <div class="from-group">
+
+          <label>User Password</label>
+          <input type="password" class="form-control" name="password" placeholder="User Password" required="">
+
+        </div>
+
+
+        <button type="submit" class="btn btn-primary float-right mt-3">Add User</button>
+        <a href="/admin/back" class="btn btn-primary mt-3">Back</a>
+
+      </form>
+    </div>
+  </div>
+</div>

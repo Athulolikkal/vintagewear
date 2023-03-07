@@ -1,0 +1,210 @@
+<section style="background-color: #eee; mt-5">
+  <div class="container  py-5">
+   
+{{#if userDetails}}
+    <div class="row mt-5 ">
+      <div class="col-lg-4 ">
+        <div class="card mb-4 mt-5">
+          <div class="card-body text-center" style="box-shadow: 0 0 10px rgb(175, 154, 127);background-color:white;">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{userDetails.fname}}</h5>
+            <p class="text-muted mb-1">{{userDetails.email}}</p>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0" style="box-shadow: 0 0 10px rgb(175, 154, 127);background-color:white;">
+            <ul class="list-group list-group-flush rounded-3">
+             
+              <li class="list-group-item d-flex  align-items-center p-3 active">
+                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+        <a href="/userprofile/{{userDetails._id}}" class="text-decoration-none text-dark"><p class="mb-0"><span class="icon"><ion-icon name="person-outline"></ion-icon>&nbsp  User info </ion-icon></span></p></a>             
+              </li>
+              {{!-- <li class="list-group-item d-flex  align-items-center p-3">
+                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+        <a href="" class="text-decoration-none text-dark"><p class="mb-0"><span class="icon"><ion-icon name="home-outline"></ion-icon>&nbsp  Address Management </ion-icon></span></p></a>
+              </li> --}}
+              <li class="list-group-item d-flex  align-items-center p-3">
+                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+        <a href="/userwallet/{{userDetails._id}}" class="text-decoration-none text-dark"><p class="mb-0"><span class="icon"><ion-icon name="wallet-outline"></ion-icon>&nbsp  Wallet</ion-icon></span></p></a>
+              </li>
+             
+               <li class="list-group-item d-flex  align-items-center p-3 ">
+                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+        <a href="/userOrderAddress/{{userDetails._id}}" class="text-decoration-none text-dark"><p class="mb-0"><span class="icon"><ion-icon name="wallet-outline"></ion-icon>&nbsp  Address</ion-icon></span></p></a>
+              </li>
+             
+             
+             
+              <li class="list-group-item d-flex  align-items-center p-3">
+                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+        <a href="/changepassword/{{userDetails._id}}" class="text-decoration-none text-dark"><p class="mb-0"><span class="icon"><ion-icon name="key-outline"></ion-icon>&nbsp  Change Password </ion-icon></span></p></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      
+     
+    
+      <div class="col-lg-8 mt-5 ">
+        <div class="card mb-4" id="userInfo">
+          <div class="card-body" style="box-shadow: 0 0 10px rgb(175, 154, 127);background-color:white;">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0"> Name</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userDetails.fname}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userDetails.email}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Phone</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userDetails.phonenumber}}</p>
+              </div>
+            </div>
+            
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Address</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{userDetails.address}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {{/if}}
+     
+     
+     <div >
+        <button onclick="editUser()" id="btn-editUser" class="btn btn-primary ">Edit info</button>
+     </div>
+
+
+
+
+
+
+{{#if userDetails}}
+
+       <form style="display:none" id="edituser" action="post">
+       
+       <div><h3 class="fw-bold">edit user info</h3></div>
+        <div class="card-body card bg-white p-3" style="box-shadow: 0 0 10px rgb(175, 154, 127);background-color:white;">
+            <div class="row">
+              <div class="col-sm-3">
+              
+              
+                <p class="mb-0"> Name</p>
+              </div>
+              <div class="col-sm-9">
+             <input class="form-control" type="text" name="fname"  value="{{userDetails.fname}}" required="">
+             
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+               <input class="form-control" type="text" name="email"  value="{{userDetails.email}}" required="">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Phone</p>
+              </div>
+              <div class="col-sm-9">
+               <input class="form-control" type="text" name="phonenumber"  value="{{userDetails.phonenumber}}" required="">
+              </div>
+            </div>
+            
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Address</p>
+              </div>
+              <div class="col-sm-9">
+               <input class="form-control" type="text" name="address"  value="{{userDetails.address}}" required="">
+              </div>
+           
+              <input type="text" name="userId" id="" value="{{userDetails._id}}" hidden>
+              
+              
+            
+            </div>
+         
+         
+          </div>
+        <div class="mt-3">
+           <button class="btn btn-primary" type="submit">submit</button>
+        
+        </div>
+
+       </form>
+          
+{{/if}}
+     </div>
+  </div>
+
+        </div> 
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+function editUser(){
+    
+    document.getElementById('userInfo').style.display="none"
+    document.getElementById('btn-editUser').style.display="none"
+    document.getElementById('edituser').style.display="";
+}
+
+
+$('#edituser').submit((e)=>{
+   e.preventDefault();
+   $.ajax({
+
+url:'/user-edit-profile',
+method:'post',
+data: $('#edituser').serialize(),
+success: (response) =>{
+swal({
+          title: "Sucess",
+          text: "sucessfully updated",
+          icon: "success",
+          button: "ok",
+        })
+.then((willSuccess) => {
+if (willSuccess) {
+location.reload() ;
+}
+})
+
+}
+})
+
+ })
+    
+</script>

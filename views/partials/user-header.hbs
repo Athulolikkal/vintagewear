@@ -1,0 +1,107 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	<div class="container">
+		<a class="navbar-brand" href="#"><span class="text-warning">vintage</span>wear <img class="userheader"
+				src="/images/_Pngtree_shopping_bag_icon_for_your_5201340-removebg-preview (2).png"></a><button
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+			class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
+			type="button"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mt-3 mb-lg-0">
+
+				<li class="nav-item">
+					<a class="nav-link" href="/userhome">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/cart">Cart<span class="badge bg-success"
+							id="cart-count">{{cartCount}}</span></a>
+				</li>
+				{{!-- <li class="nav-item">
+					<a class="nav-link" href="#">Wishlist</a>
+				</li> --}}
+
+
+
+				{{!-- <li class="nav-item">
+					<a class="nav-link" href="#"><i class="bi bi-cart"></i></a>
+				</li> --}}
+
+
+				{{!-- modal --}}
+
+				<!-- Button trigger modal -->
+				{{!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#exampleModal">
+					Launch demo modal
+				</button> --}}
+
+				<!-- Modal -->
+
+
+
+
+
+
+
+				<div class="dropdown">
+					<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1"
+						data-bs-toggle="dropdown" aria-expanded="false">
+						{{#if user}}
+						{{user.fname}}
+
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+						<li><a class="dropdown-item" href="/userprofile/{{user._id}}">Profile</a></li>
+						<li class="nav-item"><a class="nav-link" href="/userorders">My Orders</a></li>
+						<li><a class="nav-link " href="/logout"><svg xmlns="http://www.w3.org/2000/svg" width="30"
+									height="30" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+									<path fill-rule="evenodd"
+										d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+									<path fill-rule="evenodd"
+										d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+								</svg></a>
+						</li>
+					</ul>
+					{{else}}
+
+					{{/if}}
+
+				</div>
+
+
+				
+
+
+				<div class="d-flex align-items-center">
+					<form class="form-inline" action="/products?search/" method="get">
+						<div class="d-flex">
+						<input class="form-control mr-sm-2" type="search" name="search" placeholder="Search"
+							aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0 ms-2" type="submit">Search</button>
+						</div>
+					</form>
+				</div>
+
+
+
+
+
+			</ul>
+
+
+			{{!-- <div class="navbar navbar-light bg-light " style="display:flex;">
+				<form class="form-inline">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search"
+						aria-label="Search"><span><button class="btn btn-outline-success my-2 my-sm-6"
+							type="submit">Search</button></span>
+
+
+				</form>
+
+			</div> --}}
+
+
+
+
+		</div>
+	</div>
+</nav>

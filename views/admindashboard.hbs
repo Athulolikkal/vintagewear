@@ -1,0 +1,330 @@
+<div class="container-fluid admin_sidebar ">
+    <div class="wrapper">
+        <div class="side_bar">
+            <div class="side_bar_top">
+                <div class="logo_wrap ">
+                    <a href="#" class="text-decoration-none">
+                        <img src="/images/_Pngtree_shopping_bag_icon_for_your_5201340-removebg-preview (2).png" alt="logo">
+                        <!-- <span class="text">Admin</span> -->
+                        <!-- <h4>admin@gmail.com</h4> -->
+                    </a>
+                    
+                </div>
+                <div class="side_bar_menu">
+                    <div class="menu">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="side_bar_bottom">
+                <ul>
+                   <li class="active">
+                    <span class="top_curve"></span>
+                   <a href="/admin/admindashboard" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="item">Dashboard</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminuserslist" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                    <span class="item">Users</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminorders" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="reorder-three-outline"></ion-icon></span>
+                    <span class="item">Orders</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                  
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminproduct" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="pricetags-outline"></ion-icon></span>
+                    <span class="item">Products</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                   
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/admincategory" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="grid-outline"></ion-icon></span>
+                    <span class="item">Category</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                  
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminreport" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="newspaper-outline"></ion-icon></ion-icon></span>
+                    <span class="item">Report</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                   
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/admincoupon" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
+                    <span class="item">Coupon</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                   
+                  
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminoffer" class="text-decoration-none">
+                    <span class="icon"><i class="bi bi-clock"></i></span>
+                    <span class="item p-1 mt-2">Offer</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminlogout" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="item">Logout</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+
+                </ul>
+            </div>
+        </div>
+         <div class="main_container">
+
+
+
+
+
+
+
+
+                <div class="row" >
+				<div class="col-sm-6 col-md-6 col-lg-4">
+					<div class="card text-center " >
+						<div class="card-body" >
+							<h3 class="mt-4 fw-bold">Total Earnings</h3>
+              <h5 class="fw-bold ">{{formattedPrice}}</h5>
+              
+						</div>
+					</div>
+				</div>
+				
+        <div class="col-sm-6 col-md-6 col-lg-4">
+					<div class="card text-center">
+						<div class="card-body">
+							
+						<h3 class="mt-4 fw-bold">Total Orders</h3>
+              <h5 class="fw-bold ">{{totalDetails.totalOrders}}</h5>
+            
+            </div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-4">
+					<div class="card text-center">
+						<div class="card-body">
+							
+					<h3 class="mt-4 fw-bold">Total Users</h3>
+              <h5 class="fw-bold ">{{totalUsers}}</h5>
+            </div>
+					</div>
+				</div>
+
+        {{!-- <div class="col-sm-6 col-md-6 col-lg-3">
+					<div class="card text-center">
+						<div class="card-body">
+							
+						</div>
+					</div>
+				</div> --}}
+				
+			</div>
+
+
+
+
+
+
+
+
+
+{{!-- <div class="col-xl-6 d-flex justify-content-left pt-5 pb-5 ">
+    <div class="btn-group btn-group-toggle w-25 sales">
+        <button id="daily" class="btn btn-primary " onclick="histogram(1,'daily')">Daily</button>
+        <button id="weekly" class="btn btn-primary " onclick="histogram(7,'weekly')">Weekly</button>
+        <button id="monthly" class="btn btn-primary " onclick="histogram(30,'monthly')">Monthly</button>
+        <button id="yearly" class="btn btn-primary active " onclick="histogram(365,'yearly')">Yearly</button>
+    </div>
+</div> --}}
+
+
+
+
+
+
+    <div class="p-5">
+         
+         <div class="row">
+         <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1"></span> Order Status
+                </p>
+            <canvas id="myChart"></canvas>
+
+                </div>
+              </div>
+            </div>
+         
+           
+          <div class="col-md-6 " >
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1"></span>payment methods
+                </p>
+                <canvas id="pieChart" style="width:100%;height:auto"></canvas>
+
+                </div>
+              </div>
+            </div>
+          </div>
+ </div>
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+ 
+
+
+
+  </div> 
+     </div>
+</div>
+</div> 
+
+<style>
+
+.card.text-center{
+   padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 0 0px 20px 0 rgba(188, 178, 178, 0.2);
+    background-color: #8c31aa;
+    transition: 0.3s;
+     color:white;
+     height: 150px;
+}
+
+</style>
+
+
+
+
+
+
+<script>
+  
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Delivered', 'Shipped', 'Placed', 'Cancelled','pending' ],
+      datasets: [{
+        label: 'order status',
+        data: [{{totalDetails.deliverdOrder}}, {{totalDetails.shippedOrder}}, {{totalDetails.placedOrder}}, {{totalDetails.cancelledOrder}},{{totalDetails.pendingOrder}}],
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
+ var xValues = ["Cash on Delivery", "Onlinepayment",];
+var yValues = [{{totalPaymentDetails.totalCod}},{{totalPaymentDetails.totalOnlinepayment}}];
+var barColors = [
+  
+
+  "#e8c3b9",
+  "#1e7145"
+];
+
+new Chart("pieChart", {
+  type: "doughnut",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "World Wide Wine Production 2018"
+    }
+  }
+}); 
+
+
+
+
+
+
+</script>

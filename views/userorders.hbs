@@ -1,0 +1,211 @@
+
+<div class="container-fluid p-5 mt-3">
+<table class="table  mt-5 ml-3" id="table_id">
+  <thead class="p-5 mt-5 ml-5">
+    <tr>
+     
+      <th class="text-primary" scope="col">Name</th>
+      <th class="text-primary"   scope="col">Order Date</th>
+      <th class="text-primary"    scope="col">Price</th>
+       <th class="text-primary"    scope="col">phonenumber</th>
+        <th class="text-primary"    scope="col">address</th>
+      <th class="text-primary"    scope="col">status</th>
+      <th class="text-primary"   scope="col">payment Method</th>
+      <th class="text-primary"   scope="col">options</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {{#each getOrders}}
+    <tr>
+      
+      <td>{{this.deliveryDetails.name}}</td>
+      <td>{{this.displayDate}}</td>
+      <td>{{this.totalAmount}}</td>
+     <td>{{this.deliveryDetails.mobile}}</td>
+     <td>{{this.deliveryDetails.streetAddress}},<br>{{this.deliveryDetails.townAddress}},<br>{{this.deliveryDetails.districAddress}},<br>{{this.deliveryDetails.streetAddress}},<br>pin:{{this.deliveryDetails.pincode}}</td>
+      <td>{{this.status}}</td>
+      <td>{{this.paymentMethod}}</td>
+      
+      <td>
+
+              {{#ifCheck this.status "deliverd"}} 
+                      
+              <button onclick="orderReturn('{{this._id}}')" class="btn btn-primary ">return</button>          
+                     
+       
+                {{/ifCheck}}     
+
+              {{#ifCheck this.status "order-return-pending"}} 
+                      
+              <button  class="btn btn-danger mb-2">On return</button>          
+              {{/ifCheck}} 
+
+              {{#ifCheck this.status "returned"}} 
+                      
+              <button  class="btn btn-danger mb-2">Order Returnd</button>          
+              {{/ifCheck}}  
+             
+
+             {{#ifCheck this.status "shipped"}}
+              <button onclick="orderCancel('{{this._id}}')" class="btn btn-warning " >Cancel</button>  
+              {{/ifCheck}}
+
+              {{#ifCheck this.status "placed"}}
+              <button onclick="orderCancel('{{this._id}}')" class="btn btn-warning " >Cancel</button>  
+              {{/ifCheck}} 
+
+              {{#ifCheck this.status "pending"}}
+              <button onclick="orderCancel('{{this._id}}')" class="btn btn-warning " >Cancel</button>  
+              {{/ifCheck}}
+
+
+              
+              
+              
+              
+            <a href="/order-details/{{this._id}}" class="btn btn-success ">Details</a>
+        
+        
+        
+        
+        
+        
+         {{!-- <a href="/order-cancel/{{this._id}}" class="btn btn-warning ">cancel</a> --}}
+        
+       
+        {{!-- <a href="/admin/deleteuser/{{this._id}}"  onclick="retrun ('are you sure?')"
+          class="btn btn-danger">remove</a>
+        --}} 
+       
+          {{!-- <a href="/admin/unblockuser/{{this._id}}" class="btn btn-success ">Un-block</a> --}}
+       {{!-- {{#if this.status}}
+        <a href="/admin/blockuser/{{this._id}}" class="btn btn-warning blockuser " >block</a>
+         {{else}}
+         
+         <a href="/admin/blockuser/{{this._id}}" class="btn btn-success ">Un-block</a>
+      {{/if}} --}}
+      </td>
+    </tr>
+    {{/each}}
+
+  </tbody>
+</table>
+
+{{!-- pagination --}}
+   <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+	{{#each pages}}
+    <li class="page-item" ><a class="page-link"  href="/userorders?page={{this}}" aria-label="page {{this}}">{{this}}</a></li>
+   {{/each}}
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+{{!-- pagination --}}
+
+
+</div>
+
+<script>
+  function removeOrder(orderId){
+ console.log(orderId,"Id is this")
+
+swal({
+  text:"item deleted from your order",
+  button:true,
+  }).then((willDelete)=>{
+    if(willDelete){
+
+$.ajax({
+    url:'/cancelorder/'+orderId,
+    type:'get',
+    success:(response)=>{
+      console.log(response,"hloooosss")
+       
+       location.reload();
+    }
+  })
+}
+  })
+       
+
+  
+}
+
+
+function orderCancel(orderId){
+console.log(orderId,'orderId is this')
+
+swal({
+      title: "Are you sure?",
+      text: "Do you want to cancel the order?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+
+.then((willDelete) => {
+        if (willDelete) {
+$.ajax({
+  url:'/order-cancel/'+orderId,
+  type:'get',
+  success:(response)=>{
+       location.reload();
+  }
+})
+
+}
+})
+}
+
+//function orderReturn(orderId){
+  //console.log(orderId,'scriptorderiddd')
+ // $.ajax({
+   // url:'/order-return/'+orderId,
+   // type:'get',
+   // success:(response)=>{
+         //location.reload();
+  //  }
+  //})
+
+//}
+
+
+
+function orderReturn(orderId){
+console.log(orderId,'orderId is this')
+
+swal({
+      title: "Are you sure?",
+      text: "Do you want to return the order?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+
+.then((willDelete) => {
+        if (willDelete) {
+$.ajax({
+  url:'/order-return/'+orderId,
+  type:'get',
+  success:(response)=>{
+       location.reload();
+  }
+})
+
+}
+})
+}
+
+
+
+</script>

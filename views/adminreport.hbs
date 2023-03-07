@@ -1,0 +1,228 @@
+
+<div class="container-fluid admin_sidebar ">
+    <div class="wrapper">
+        <div class="side_bar">
+            <div class="side_bar_top">
+                <div class="logo_wrap ">
+                    <a href="#" class="text-decoration-none">
+                        <img src="/images/_Pngtree_shopping_bag_icon_for_your_5201340-removebg-preview (2).png"
+                            alt="logo">
+
+                    </a>
+
+                </div>
+                <div class="side_bar_menu">
+                    <div class="menu">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="side_bar_bottom">
+                <ul>
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/admindashboard" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span class="item">Dashboard</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminuserslist" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                            <span class="item">Users</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminorders" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="reorder-three-outline"></ion-icon></span>
+                            <span class="item">Orders</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminproduct" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="pricetags-outline"></ion-icon></span>
+                            <span class="item">Products</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/admincategory" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="grid-outline"></ion-icon></span>
+                            <span class="item">Category</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li class="active">
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminreport" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="newspaper-outline"></ion-icon></ion-icon></span>
+                            <span class="item">Report</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/admincoupon" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
+                            <span class="item">Coupon</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminoffer" class="text-decoration-none">
+                            <span class="icon"><i class="bi bi-clock"></i></span>
+                            <span class="item p-1 mt-2">Offer</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+
+
+
+
+
+
+                    <li>
+                        <span class="top_curve"></span>
+                        <a href="/admin/adminlogout" class="text-decoration-none">
+                            <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                            <span class="item">Logout</span>
+                        </a>
+                        <span class="bottom_curve"></span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="main_container">
+
+            <div class="d-flex justify-content-center mb-4">
+                <button type="button" class="btn btn-primary rounded-pill btn_print me-3" id="rep"
+                    value="Download as Pdf">Download PDF</button>
+                <button type="button" class="btn btn-primary rounded-pill" onclick="export_data()"
+                    value="Export to excel">Download as Excel</button>
+
+                
+
+
+{{!-- <label for="date"></label>
+<input type="date" id="date" name="date"> --}}
+
+
+
+            </div>
+
+
+
+            <div id="container_content">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">OrderId</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Ordered Date</th>
+                            <th scope="col">Delivered Date</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Payment-Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {{#each response}}
+                        <tr>
+
+                            <td>{{this._id}}</td>
+                            <td>{{this.deliveryDetails.name}}</td>
+                            <td>{{this.displayDate}}</td>
+                            <td>{{this.displaydeliverdDate}}</td>
+                            <td>{{this.totalAmount}}</td>
+                            <td>{{this.paymentMethod}}</td>
+                        </tr>
+                        {{/each}}
+
+
+                    </tbody>
+
+                </table>
+
+
+
+            </div>
+            <br>
+            <br>
+            <hr>
+            <h5 class="text-right">Total Earnings: &nbsp; <span class="fw-bold">{{formattedPrice}}</span> </h5>
+            {{!-- <h5 class="text-right">Total Earnings: &nbsp; <span class="fw-bold">{{totalAmount}}</span> </h5> --}}
+
+            <hr>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    $(document).ready(function ($) {
+        $(document).on('click', '.btn_print', function (event) {
+            event.preventDefault();
+            var element = document.getElementById('container_content');
+            let randomNumber = Math.floor(Math.random() * (10000000000 - 1)) + 1;
+            var opt = {
+                margin: 0,
+                filename: 'SalesReport' + randomNumber + '.pdf',
+                html2canvas: { scale: 10 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        });
+    });
+
+
+
+
+    function export_data() {
+        let data = document.getElementById('container_content');
+        var fp = XLSX.utils.table_to_book(data, { sheet: 'vishal' });
+        XLSX.write(fp, {
+            bookType: 'xlsx',
+            type: 'base64'
+        });
+        XLSX.writeFile(fp, 'test.xlsx');
+    }
+
+
+ 
+
+
+
+
+
+</script>

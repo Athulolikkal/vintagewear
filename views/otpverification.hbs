@@ -1,0 +1,59 @@
+<section class="vh-100 bg-gradient"  style="background-color: rgb(234, 209, 226);">
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+              <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                  <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+      
+                      <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4">OTP Login</p>
+                          
+                          {{#if otpErr}}
+                  <p class="text-danger text-center ">OTP is invalid</p>
+                     
+                   {{else}}  
+
+                   {{/if}}
+                      <form class="mx-1 mx-md-4" id="reg-form" action="/otpverification" method="post">
+      
+                       
+      
+                        <div class="d-flex flex-row align-items-center mb-2">
+                          <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                          <div class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example3c"> enter the OTP<br></label>
+                            <input type="" value="{{phonenumber}}" name="phonenumber" id=""> <br>
+
+                            <input name="otp" type="text" id="form3Example3c" class="form-control" placeholder="enter otp" required=""/>
+                           
+                          </div>
+                        </div>
+      
+                       
+      
+                        
+                        <div class="form-check d-flex justify-content-center mb-2 p-4">
+                        
+                           <a href="/userlogin">Try another method??</a><br>
+                            
+                          </label>
+                        </div>
+                           
+                        
+                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                          <button type="submit" id="otplogin" class="btn btn-primary btn-lg">Login</button>
+                        </div>
+      
+                      </form>
+      
+                    </div>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+ 

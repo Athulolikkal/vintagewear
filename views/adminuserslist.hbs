@@ -1,0 +1,175 @@
+<div class="container-fluid admin_sidebar ">
+    <div class="wrapper">
+        <div class="side_bar">
+            <div class="side_bar_top">
+                <div class="logo_wrap ">
+                    <a href="#" class="text-decoration-none">
+                        <img src="/images/_Pngtree_shopping_bag_icon_for_your_5201340-removebg-preview (2).png" alt="logo">
+                        <!-- <span class="text">Admin</span> -->
+                        <!-- <h4>admin@gmail.com</h4> -->
+                    </a>
+                    
+                </div>
+                <div class="side_bar_menu">
+                    <div class="menu">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="side_bar_bottom">
+                <ul>
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/admindashboard" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="item">Dashboard</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+
+                   <li class="active">
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminuserslist" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                    <span class="item">Users</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminorders" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="reorder-three-outline"></ion-icon></span>
+                    <span class="item">Orders</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                  
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminproduct" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="pricetags-outline"></ion-icon></span>
+                    <span class="item">Products</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                   
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/admincategory" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="grid-outline"></ion-icon></span>
+                    <span class="item">Category</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                  
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminreport" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="newspaper-outline"></ion-icon></ion-icon></span>
+                    <span class="item">Report</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                   
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/admincoupon" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
+                    <span class="item">Coupon</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                   
+                    <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminoffer" class="text-decoration-none">
+                    <span class="icon"><i class="bi bi-clock"></i></span>
+                    <span class="item p-1 mt-2">Offer</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li>
+                    <span class="top_curve"></span>
+                   <a href="/admin/adminlogout" class="text-decoration-none">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="item">Logout</span>
+                   </a>
+                    <span class="bottom_curve"></span>
+                   </li> 
+
+                </ul>
+            </div>
+        </div>
+         <div class="main_container">
+        
+          
+<table class="table ms-auto" id="table_id">
+  <thead>
+    <tr>
+     
+      <th scope="col">Name</th>
+      <th scope="col">email</th>
+      <th scope="col">options</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {{#each response}}
+    <tr>
+      
+      <td>{{this.fname}}</td>
+      <td>{{this.email}}</td>
+      
+      <td>
+
+        <a href="/admin/edituser/{{this._id}}" class="btn btn-primary ">edit</a>
+
+        <a href="/admin/deleteuser/{{this._id}}"  onclick="retrun alert('are you sure?')"
+          class="btn btn-danger">remove</a>
+       
+       
+          {{!-- <a href="/admin/unblockuser/{{this._id}}" class="btn btn-success ">Un-block</a> --}}
+       {{#if this.status}}
+        <a href="/admin/blockuser/{{this._id}}" class="btn btn-warning blockuser " >block</a>
+         {{else}}
+         
+         <a href="/admin/blockuser/{{this._id}}" class="btn btn-success ">Un-block</a>
+      {{/if}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+
+<a href="/admin/insertuser" class="btn btn-success mt-3">Insert User</a>
+
+{{!-- datatables --}}
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
+
+
+
+          
+        </div> 
+     </div>
+</div>
+</div> 
+
+{{!-- <style>
+.btnbtn-warning.blockuser:active{
+  background: green;
+
+}
+
+</style> --}}

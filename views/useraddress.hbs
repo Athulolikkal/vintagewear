@@ -1,0 +1,131 @@
+<section style="background-color: #eee; mt-5">
+  <div class="container  py-5">
+   
+ {{#if userDetails}}
+    <div class="row mt-5 ">
+      <div class="col-lg-4 ">
+    
+   
+        <div class="card mb-4 mt-5">
+          <div class="card-body text-center" style="box-shadow: 0 0 10px rgb(175, 154, 127);background-color:white;">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{userDetails.fname}}</h5>
+            <p class="text-muted mb-1">{{userDetails.email}}</p>
+          </div>
+        </div>
+       
+       
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0" style="box-shadow: 0 0 10px rgb(175, 154, 127);background-color:white;">
+            <ul class="list-group list-group-flush rounded-3">
+             
+              <li class="list-group-item d-flex  align-items-center p-3 ">
+                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+        <a href="/userprofile/{{userDetails._id}}" class="text-decoration-none text-dark"><p class="mb-0"><span class="icon"><ion-icon name="person-outline"></ion-icon>&nbsp  User info </ion-icon></span></p></a>             
+              </li>
+             
+              <li class="list-group-item d-flex  align-items-center p-3 ">
+                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+        <a href="/userwallet/{{userDetails._id}}" class="text-decoration-none text-dark"><p class="mb-0"><span class="icon"><ion-icon name="wallet-outline"></ion-icon>&nbsp  Wallet</ion-icon></span></p></a>
+              </li>
+
+               <li class="list-group-item d-flex  align-items-center p-3 active">
+                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+        <a href="/userOrderAddress/{{userDetails._id}}" class="text-decoration-none text-dark"><p class="mb-0"><span class="icon"><ion-icon name="wallet-outline"></ion-icon>&nbsp  Address</ion-icon></span></p></a>
+              </li>
+             
+              <li class="list-group-item d-flex  align-items-center p-3 ">
+                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+        <a href="/changepassword/{{userDetails._id}}" class="text-decoration-none text-dark"><p class="mb-0"><span class="icon"><ion-icon name="key-outline"></ion-icon>&nbsp  Change Password </ion-icon></span></p></a>
+            
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+     
+      <div class="col-lg-8 mt-5 ">
+       
+  <div> <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-4 text-warning">User<span class="text-dark">Address</span></p>
+  
+  </div>      
+       
+      {{#if userDetails.oderaddress }}
+       {{#each userDetails.oderaddress}}
+        <div class="card mb-4" id="userInfo">
+          <div class="card-body p-5" style="box-shadow: 0 0 10px rgb(175, 154, 127);background-color:white;">
+
+           <p class="text-center fw-bold">{{this.name}},{{this.housename}},{{this.street}},{{this.town}},{{this.district}},pin:{{this.pincode}}</p>
+       <p class="text-center fw-bold">{{this.phonenumber}}</p>
+        {{!-- <p class="text-center fw-bold">{{this.orderAddressId}}</p> --}}
+
+       <a   href="#" onclick="deleteAddress('{{this.orderAddressId}}')"><i class="bi bi-trash-fill"></i></a> 
+       {{!-- <a   href="/deleteuseraddress/{{this.orderAddressId}}"><i class="bi bi-trash-fill"></i></a>  --}}
+         {{!-- <a data-confirm="Are you sure?" data-method="delete" href="/deleteuseraddress/{{this.orderAddressId}}" rel="nofollow">Delete</a> --}}
+
+          </div>
+        </div>
+    {{/each}}
+
+   {{else}}
+    
+    <div class="card mb-4" id="userInfo">
+          <div class="card-body p-5">
+
+           
+        <h5 class="text-center fw-bold text-warning">User Address Is Empty</h5>
+       <p class="text-center mt-3 fw-bold text-danger">You Can Add The  Order Address When You Purchasing With Us</p>
+        
+          </div>
+        </div>
+
+        {{/if}}
+    
+    
+    
+    </div>
+     
+     
+     
+     
+     
+     
+     
+     
+      </div>
+     {{/if}}
+     
+      </div> 
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+   
+   function deleteAddress(orderAddressId){
+      console.log(orderAddressId,'orderAddressidddd')
+     swal({
+       title: "Are you sure?",
+      text: "Do you want to delete address?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+     }).then((willDelete)=>{
+        if(willDelete){
+
+  $.ajax({
+        url:'/deleteuseraddress/'+orderAddressId,
+        type:'delete',
+        success:(response)=>{
+          location.reload();
+        }
+      })
+        }
+     })
+    }
+
+</script>
