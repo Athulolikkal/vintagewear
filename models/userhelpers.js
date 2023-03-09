@@ -451,10 +451,11 @@ module.exports = {
             resolve(myOrders)
         })
     },
+   
     userOrders:(userId,lmt,pageNum)=>{
         let skipNum=parseInt((pageNum-1)*lmt)
         return new Promise(async(resolve,reject)=>{
-            let myOrders=await db.get().collection(collection.ORDER_COLLECTIONS).find({userId:objectId(userId)}).skip(skipNum).limit(lmt).sort({'date':-1}).toArray()
+            let myOrders=await db.get().collection(collection.ORDER_COLLECTIONS).find({userId:objectId(userId),status:{$ne:'pending'}}).skip(skipNum).limit(lmt).sort({'date':-1}).toArray()
              resolve(myOrders)
         })
     },

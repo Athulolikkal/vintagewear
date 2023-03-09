@@ -3,6 +3,7 @@ const { response, route, render } = require('../app');
 var router = express.Router();
 const userHelpers = require('../models/userhelpers');
 const productHelpers = require('../models/producthelpers');
+const adminHelpers=require('../models/adminhelpers');
 const { userDetails } = require('../models/adminhelpers');
 
 require('dotenv').config()
@@ -10,8 +11,7 @@ require('dotenv').config()
 const client = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN)
 
 
-// const passport=require('passport')
-// const googleStrategy=require('passport-google-oauth').OAuth2Strategy;
+
 const paypal = require('paypal-rest-sdk');
 const { ObjectID, ObjectId } = require('bson');
 const { query } = require('express');
@@ -23,18 +23,7 @@ paypal.configure({
   'client_secret': process.env.CLIENT_SECRET
 });
 
-// passport.use(
-//   new googleStrategy({
-//     clientID:process.env.GOOGLE_CLIENT_ID,
-//     clientSecret:process.env.GOOGLE_CLIENT_SECRET,
-//     callbackURL:process.env.CALLBACK_URL
-//   },
-//   function(accessToken,refreshToken,profile,done){
-//     userProfile=profile;
-//     return done(null,userProfile);
-//   }
-//   )
-// )
+
 
 module.exports = {
 
@@ -588,9 +577,28 @@ module.exports = {
     }
   },
 
-  userOderCancelStatus: (req, res) => {
+  userOderCancelStatus:async (req, res) => {
+  
     orderId = req.params.id
     userId = req.session.user._id
+ 
+    //stock management
+    let orderDetails=await adminHelpers.retrunOrderDetails(orderId)
+  let item=await adminHelpers.productReturn(orderId)
+  let itemLength=item.length
+ 
+  for(let i=0;i<itemLength;i++){
+    let stock=0;
+    let quantity=parseInt(item[i]?.products?.quantity)
+    let product=await adminHelpers.findProduct(item[i]?.products?.item)
+    stock=parseInt(product.stock+quantity)
+    console.log(stock,'stockkk');
+    await adminHelpers.changeStock(item[i]?.products?.item,stock)
+  }
+  //end of stock management
+
+  
+  
     userHelpers.orderCancelation(orderId, userId).then((response) => {
       console.log(response, "order cancelled")
       res.json({ status: true })

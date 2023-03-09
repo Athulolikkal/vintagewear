@@ -147,14 +147,14 @@ module.exports={
 totalOrderView:(pageNum,lmt)=>{
     let skipNum=parseInt((pageNum-1)*lmt)
     return new Promise(async(resolve,reject)=>{
-        let orders=await db.get().collection(collection.ORDER_COLLECTIONS).find().skip(skipNum).limit(lmt).sort({"date":-1}).toArray()
+        let orders=await db.get().collection(collection.ORDER_COLLECTIONS).find({status:{$ne:'pending'}}).skip(skipNum).limit(lmt).sort({"date":-1}).toArray()
         resolve(orders)
     })
 },
 
 userOrderView:()=>{
     return new Promise(async(resolve,reject)=>{
-        let orders=await db.get().collection(collection.ORDER_COLLECTIONS).find().sort({"date":-1}).toArray()
+        let orders=await db.get().collection(collection.ORDER_COLLECTIONS).find({ status: { $ne: 'pending' } }).sort({"date":-1}).toArray()
         resolve(orders)
     })
 },
@@ -231,10 +231,10 @@ totalDashboardView:()=>{
        data.shippedOrder=await db.get().collection(collection.ORDER_COLLECTIONS).find({status:"shipped"}).count()
        data.cancelledOrder=await db.get().collection(collection.ORDER_COLLECTIONS).find({status:"cancelled"}).count()
        data.placedOrder=await db.get().collection(collection.ORDER_COLLECTIONS).find({status:"placed"}).count()
-       data.pendingOrder=await db.get().collection(collection.ORDER_COLLECTIONS).find({status:"pending"}).count()
+    //    data.pendingOrder=await db.get().collection(collection.ORDER_COLLECTIONS).find({status:"pending"}).count()
        data.returnedOrder=await db.get().collection(collection.ORDER_COLLECTIONS).find({status:"returned"}).count()
        data.reqReturnOrder=await db.get().collection(collection.ORDER_COLLECTIONS).find({status:"order-return-pending"}).count()
-       data.totalOrders=parseInt(data.deliverdOrder+data.shippedOrder+data.cancelledOrder+data.pendingOrder+data.placedOrder+data.returnedOrder+data.reqReturnOrder)
+       data.totalOrders=parseInt(data.deliverdOrder+data.shippedOrder+data.cancelledOrder+data.placedOrder+data.returnedOrder+data.reqReturnOrder)
        console.log(data.totalOrders,"totalOrderssssss");
        console.log(data,"deliverdorderrrrr");
        resolve(data)

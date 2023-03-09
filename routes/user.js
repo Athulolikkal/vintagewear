@@ -4,7 +4,7 @@ var router = express.Router();
 const userHelpers = require('../models/userhelpers');
 const productHelpers = require('../models/producthelpers');
 const { userDetails } = require('../models/adminhelpers');
-// const client = require('twilio')("AC820e52329f55752815191f21cd65fb0b", "70b08a57889f58668984d78288287333")
+
 
 const userControllers=require('../controllers/usercontrollers')
 const categoryControllers=require('../controllers/categorycontrollers')
@@ -14,8 +14,7 @@ require('dotenv').config()
 
 const client = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN)
 
-// const passport=require('passport')
-// const googleStrategy=require('passport-google-oauth').OAuth2Strategy;
+
 
 const paypal = require('paypal-rest-sdk');
 const { userProfile } = require('../controllers/usercontrollers');
@@ -24,34 +23,10 @@ paypal.configure({
   'mode': 'sandbox',
   'client_id':process.env.CLIENT_ID, 
   'client_secret':process.env.CLIENT_SECRET
-  // 'client_id': 'AY0h8O7slqMdO1WTA9BEJ58Jc-ZycWU6LSrcHbSa45U89B5P40uk964J_-wozw5j9cBLTyn-Qp1INQia',
-  // 'client_secret': 'EPCWSl1TDZfwZdDVKmHrWOvY6gWbFkd4yR97b14o_UieA8ynE37qDdUQ0v4-ZS6QxMqP3Hf1aKzDULZX'
+ 
 });
 
-// passport.use(
-//   new googleStrategy({
-//     clientID:process.env.GOOGLE_CLIENT_ID,
-//     clientSecret:process.env.GOOGLE_CLIENT_SECRET,
-//     callbackURL:process.env.CALLBACK_URL
-//   },
-//   function(accessToken,refreshToken,profile,done){
-//     userProfile=profile;
-//     return done(null,userProfile);
-//   }
-//   )
-// );
-
-// router.get('/google',passport.authenticate('google',{scope:['profile','email']}));
-// router.get('/google/callback',passport.authenticate('google',{failureRedirect:'/auth/error'}),
-// (req,res)=>{
-//   res.redirect('/auth/success');
-// }
-// );
-// router.get('/success',async(req,res)=>{
-//   const{failure,success}=await googleAuth.registerWithGoogle(userProfile);
-//   res.render('success',{user:userProfile});
-// });
-// router.get('/error',(req,res)=>res.send('error logging in'));  
+  
 
 
 
@@ -152,7 +127,8 @@ router.get('/paymentsuccess',userControllers.paymentSuccess)
 
 
 
-//perventing from direct acessing the home  page
+//--------perventing from direct acessing the home  page-------------------------------------->
+
 function isUserLoggedIn(req, res, next) {
   if (req.session.userLoggedIn) {
     user = req.session.user
@@ -163,7 +139,8 @@ function isUserLoggedIn(req, res, next) {
   }
 }
 
-//preventing from going to login if we logined ones it helps to stay in login terminal 
+//--------preventing from going to login if we logined ones it helps to stay in login terminal-------------------------> 
+
 function userNotLoggedin(req, res, next) {
   console.log(req.session.userLoggedIn)
   if (req.session.userLoggedIn) {
