@@ -96,7 +96,7 @@ productDetails:(productId)=>{
                 category:productDetails.category,
                 description:productDetails.description,
                 price:productDetails.price,
-                stock:productDetails.stock,
+                stock:parseInt(productDetails.stock),
                 image:urls,
              categoryId:productDetails.categoryId.toString()
             }

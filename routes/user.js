@@ -26,18 +26,7 @@ paypal.configure({
  
 });
 
-  
-
-
-
-
-
-
-
-
-
-
-/* GET home page. */
+  /* GET home page. */
 router.get('/', userNotLoggedin,userControllers.renderLandingPage);
 
 router.get('/userlogin', userNotLoggedin,userControllers.renderUserLogin)

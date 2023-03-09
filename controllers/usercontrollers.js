@@ -75,7 +75,7 @@ module.exports = {
   userHome: async (req, res) => {
     let user = req.session.user
     let cartCount = null;
-    let limit = 6
+    let limit = 8
     let pageNum = req.query.page || 1
     let page = parseInt(pageNum)
     console.log(page);
@@ -597,7 +597,7 @@ module.exports = {
   }
   //end of stock management
 
-  
+
   
     userHelpers.orderCancelation(orderId, userId).then((response) => {
       console.log(response, "order cancelled")
