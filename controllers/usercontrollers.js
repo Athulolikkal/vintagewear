@@ -3,7 +3,7 @@ const { response, route, render } = require('../app');
 var router = express.Router();
 const userHelpers = require('../models/userhelpers');
 const productHelpers = require('../models/producthelpers');
-const adminHelpers=require('../models/adminhelpers');
+const adminHelpers = require('../models/adminhelpers');
 const { userDetails } = require('../models/adminhelpers');
 
 require('dotenv').config()
@@ -199,7 +199,7 @@ module.exports = {
       }).catch((err) => {
         delete req.session.user
 
-        console.log( err)
+        console.log(err)
         res.redirect('/otplogin')
       })
   },
@@ -312,8 +312,8 @@ module.exports = {
 
         userHelpers.deleteCart(req.session.user._id)
         res.json({ COD: true })
-        
-      } else   if (req.body['payment-method'] == 'paypal') {
+
+      } else if (req.body['payment-method'] == 'paypal') {
         //paypal start---
         req.session.orderId = response
         var create_payment_json = {
@@ -361,125 +361,125 @@ module.exports = {
           }
         });
       }
-       else if(req.body['payment-method'] == 'stripe'){
-       
-       const stripePrivateKey=process.env.STRIPE_KEY
-       const stripeSecretKey=process.env.STRIPE_PUBLIC_KEY
-       
-        const stripe=require('stripe')(process.env.STRIPE_KEY)
-       
-        let items=[{id:1,quantity:1,priceInCent:totalAmount,name:'Vintage Wear'},]
-        try{
-        
+      else if (req.body['payment-method'] == 'stripe') {
 
-          const session= await stripe.checkout.sessions.create({
+        const stripePrivateKey = process.env.STRIPE_KEY
+        const stripeSecretKey = process.env.STRIPE_PUBLIC_KEY
+
+        const stripe = require('stripe')(process.env.STRIPE_KEY)
+
+        let items = [{ id: 1, quantity: 1, priceInCent: totalAmount, name: 'Vintage Wear' },]
+        try {
+
+
+          const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
             mode: "payment",
-            line_items:items.map(items=>{
-            return {
-               
-              price_data:{
-                currency:'INR',
-                product_data:{
-                  name:items.name,
+            line_items: items.map(items => {
+              return {
+
+                price_data: {
+                  currency: 'INR',
+                  product_data: {
+                    name: items.name,
+                  },
+                  unit_amount: items.priceInCent,
                 },
-                unit_amount:items.priceInCent,
-              },
-              quantity:items.quantity,
-           
-            }
+                quantity: items.quantity,
+
+              }
             }),
-        
-          
-          success_url:`http://localhost:3000/paymentsuccess`,
-          cancel_url:`http://localhost:3000/userorders`,
-          
-          
+
+
+            success_url: `http://localhost:3000/paymentsuccess`,
+            cancel_url: `http://localhost:3000/userorders`,
+
+
           })
           // console.log('successsssss');
-         console.log(session.url,'urllllllllll');
-         
-         //stock managemnet
-        let item = await userHelpers.cartItems(req.body.userId)
-        console.log(item, 'itemmm');
-        console.log(item[0]?.products?.item, 'productss iddd')
-        let itemLength = item.length
-        console.log(itemLength, 'lengthhhhh');
+          console.log(session.url, 'urllllllllll');
 
-        for (let i = 0; i < itemLength; i++) {
+          //stock managemnet
+          let item = await userHelpers.cartItems(req.body.userId)
+          console.log(item, 'itemmm');
+          console.log(item[0]?.products?.item, 'productss iddd')
+          let itemLength = item.length
+          console.log(itemLength, 'lengthhhhh');
 
-          let stock = 0;
-          let quantity = parseInt(item[i]?.products?.quantity)
-          console.log(quantity, 'quantityy');
+          for (let i = 0; i < itemLength; i++) {
 
-          let product = await userHelpers.findProduct(item[i]?.products?.item)
+            let stock = 0;
+            let quantity = parseInt(item[i]?.products?.quantity)
+            console.log(quantity, 'quantityy');
 
-          stock = product.stock - quantity
-          console.log(stock, 'stockkkk');
-          await userHelpers.changeStock(item[i]?.products?.item, stock)
-          //ends stock management  
+            let product = await userHelpers.findProduct(item[i]?.products?.item)
+
+            stock = product.stock - quantity
+            console.log(stock, 'stockkkk');
+            await userHelpers.changeStock(item[i]?.products?.item, stock)
+            //ends stock management  
+          }
+
+          req.session.orderId = response
+
+
+
+          let products = await userHelpers.getCartProductList(req.session.user._id)
+          console.log(products, 'products aree');
+
+          await userHelpers.changePaymentStatus(req.session.orderId, req.session.user._id, products)
+          req.session.orderId = null
+          res.json({ url: session.url, stripe: true })
+
+
+        } catch (error) {
+
+          console.log(error, 'stripe error');
+
+          throw error
+
         }
+      } else if (req.body['payment-method'] == 'wallet') {
 
         req.session.orderId = response
-       
-       
-       
-        let products = await userHelpers.getCartProductList(req.session.user._id)
-        console.log(products, 'products aree');
-      
-        await userHelpers.changePaymentStatus(req.session.orderId, req.session.user._id, products)
-        req.session.orderId = null
-        res.json({url:session.url,stripe:true})
 
+        let user = await userHelpers.findUser(req.body.userId)
 
-        }catch (error){
+        let userWallet = parseInt(user.wallet)
+        console.log(userWallet, 'wallet amount');
+        if (totalAmount <= userWallet) {
+          let isWallet = userWallet - totalAmount
+          let response = await userHelpers.walletChange(req.body.userId, isWallet)
 
-          console.log(error,'stripe error');
-         
-          throw error
-        
+          //stock managemnet
+          let item = await userHelpers.cartItems(req.body.userId)
+          console.log(item, 'itemmm');
+          console.log(item[0]?.products?.item, 'productss iddd')
+          let itemLength = item.length
+          console.log(itemLength, 'lengthhhhh');
+
+          for (let i = 0; i < itemLength; i++) {
+
+            let stock = 0;
+            let quantity = parseInt(item[i]?.products?.quantity)
+            console.log(quantity, 'quantityy');
+
+            let product = await userHelpers.findProduct(item[i]?.products?.item)
+
+            stock = product.stock - quantity
+            console.log(stock, 'stockkkk');
+            await userHelpers.changeStock(item[i]?.products?.item, stock)
+            //ends stock management  
+          }
+
+          console.log(req.session.orderId, 'order address');
+
+          await userHelpers.changePaymentStatus(req.session.orderId, req.session.user._id, products)
+          req.session.orderId = null
+          res.json({ COD: true })
         }
-      }else if (req.body['payment-method'] == 'wallet'){
-             
-        req.session.orderId=response
-       
-        let user=await userHelpers.findUser(req.body.userId)
-       
-        let userWallet=parseInt(user.wallet)
-        console.log(userWallet,'wallet amount');
-        if(totalAmount<=userWallet){
-          let isWallet=userWallet-totalAmount
-       let response= await userHelpers.walletChange(req.body.userId,isWallet)
-      
-         //stock managemnet
-        let item = await userHelpers.cartItems(req.body.userId)
-        console.log(item, 'itemmm');
-        console.log(item[0]?.products?.item, 'productss iddd')
-        let itemLength = item.length
-        console.log(itemLength, 'lengthhhhh');
-
-        for (let i = 0; i < itemLength; i++) {
-
-          let stock = 0;
-          let quantity = parseInt(item[i]?.products?.quantity)
-          console.log(quantity, 'quantityy');
-
-          let product = await userHelpers.findProduct(item[i]?.products?.item)
-
-          stock = product.stock - quantity
-          console.log(stock, 'stockkkk');
-          await userHelpers.changeStock(item[i]?.products?.item, stock)
-          //ends stock management  
-        }
-        
-        console.log(req.session.orderId,'order address');
-     
-        await userHelpers.changePaymentStatus(req.session.orderId, req.session.user._id, products)
-        req.session.orderId = null
-           res.json({ COD: true })
-        }
-        else{
-          res.json({wallet:true})
+        else {
+          res.json({ wallet: true })
         }
       }
     })
@@ -577,28 +577,28 @@ module.exports = {
     }
   },
 
-  userOderCancelStatus:async (req, res) => {
-  
+  userOderCancelStatus: async (req, res) => {
+
     orderId = req.params.id
     userId = req.session.user._id
- 
+
     //stock management
-    let orderDetails=await adminHelpers.retrunOrderDetails(orderId)
-  let item=await adminHelpers.productReturn(orderId)
-  let itemLength=item.length
- 
-  for(let i=0;i<itemLength;i++){
-    let stock=0;
-    let quantity=parseInt(item[i]?.products?.quantity)
-    let product=await adminHelpers.findProduct(item[i]?.products?.item)
-    stock=parseInt(product.stock+quantity)
-    console.log(stock,'stockkk');
-    await adminHelpers.changeStock(item[i]?.products?.item,stock)
-  }
-  //end of stock management
+    let orderDetails = await adminHelpers.retrunOrderDetails(orderId)
+    let item = await adminHelpers.productReturn(orderId)
+    let itemLength = item.length
+
+    for (let i = 0; i < itemLength; i++) {
+      let stock = 0;
+      let quantity = parseInt(item[i]?.products?.quantity)
+      let product = await adminHelpers.findProduct(item[i]?.products?.item)
+      stock = parseInt(product.stock + quantity)
+      console.log(stock, 'stockkk');
+      await adminHelpers.changeStock(item[i]?.products?.item, stock)
+    }
+    //end of stock management
 
 
-  
+
     userHelpers.orderCancelation(orderId, userId).then((response) => {
       console.log(response, "order cancelled")
       res.json({ status: true })
@@ -671,7 +671,7 @@ module.exports = {
     await userHelpers.verifyCoupon(coupon, totalAmount).then((response) => {
       console.log(response, 'couponavailableeee');
       res.json(response)
-     
+
     })
   },
   cancelApplyCoupon: (req, res) => {
@@ -691,14 +691,14 @@ module.exports = {
     try {
       userId = req.params.id
       let userDetails = await userHelpers.userDetails(userId)
-      
+
       const formatter = new Intl.NumberFormat('en-IN', {
         style: 'currency',
         currency: 'INR'
       });
-      
+
       const formattedPrice = formatter.format(userDetails.wallet);
-      res.render('userwallet', { user, userDetails,formattedPrice })
+      res.render('userwallet', { user, userDetails, formattedPrice })
 
 
     } catch {

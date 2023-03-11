@@ -2,12 +2,12 @@
   <div class="col-md-6 m-auto">
     <div class="container mt-5 pl-5">
       <h2 class="text-center fw-bold">Category</h2>
-     
+
       {{!-- {{#if insertError}}
-        <p class="text-danger text-center ">invalid Email</p>
-       {{else}}
-      
-       {{/if}} --}}
+      <p class="text-danger text-center ">invalid Email</p>
+      {{else}}
+
+      {{/if}} --}}
       <form action="/admin/addcategory" method="post">
 
         <div class="from-group">
@@ -34,9 +34,9 @@
         </div> --}}
 
 
-        <button type="submit" class="btn btn-primary float-right mt-3">Add</button> 
-        
-         <a href="/admin/categoryback" class="btn btn-primary mt-3">Back</a>
+        <button type="submit" class="btn btn-primary float-right mt-3">Add</button>
+
+        <a href="/admin/categoryback" class="btn btn-primary mt-3">Back</a>
 
       </form>
     </div>
@@ -45,12 +45,12 @@
 
 <script>
   $("input#catname").on({
-  keydown: function(e) {
-    if (e.which === 32)
-      return false;
-  },
-  change: function() {
-    this.value = this.value.replace(/\s/g,"");
-}
-});
+    keydown: function (e) {
+      if (e.which === 32)
+        return false;
+    },
+    change: function () {
+      this.value = this.value.replace(/\s/g, "");
+    }
+  });
 </script>
