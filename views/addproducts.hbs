@@ -12,7 +12,7 @@
 
 
 
-      <form action="/admin/addproducts" enctype="multipart/form-data" method="post">
+      <form action="/admin/addproducts" enctype="multipart/form-data" method="post" id="myForm">
        
         <div class="from-group">
 
@@ -40,14 +40,14 @@
         <div class="from-group">
 
           <label>Price</label>
-          <input type="text" class="form-control" name="price" required="">
+          <input type="text" class="form-control" name="price" required="" id="price">
 
         </div>
 
         <div class="from-group">
 
           <label>Quantity</label>
-          <input type="number" class="form-control" name="stock" required="">
+          <input type="number" class="form-control" name="stock" required="" id="quantity">
 
         </div>
 
@@ -351,4 +351,36 @@
       })
     })
   })
+</script>
+
+
+
+<script>
+ const myForm = document.getElementById('myForm');
+const priceInput = document.getElementById('price');
+const stockInput =document.getElementById('quantity')
+myForm.addEventListener('submit', function(event) {
+  const price = Number(priceInput.value);
+  const stock=Number(stockInput.value);
+  if (isNaN(price) || price <0 ) {
+    priceInput.setCustomValidity('enter the price greater than 0');
+    priceInput.style.border = '2px solid red';
+    priceInput.style.color = 'red';
+    event.preventDefault();
+  }else if(isNaN(stock)||stock<0){
+    stockInput.setCustomValidity('enter a valid quantity of products');
+    stockInput.style.border = '2px solid red';
+    stockInput.style.color = 'red';
+    event.preventDefault();
+  }
+   else {
+    priceInput.setCustomValidity('');
+    stockInput.setCustomValidity('');
+    priceInput.style.border = '';
+    priceInput.style.color = '';
+    stockInput.style.border = '';
+    stockInput.style.color = '';
+  }
+});
+
 </script>
