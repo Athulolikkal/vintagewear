@@ -946,12 +946,13 @@ module.exports = {
     },
     searchResults: (searchItem) => {
         return new Promise(async (resolve, reject) => {
-            let result = await db.get().collection(collection.PRODUCT_COLLECTIONS).find({
+            let result = await db.get().collection(collection.PRODUCT_COLLECTIONS).find({'$and':[{stock:{$gt:0}
+            },{ '$or': [
+                { name: { $regex: searchItem, '$options': 'i' } },
+                { category: { $regex: searchItem, '$options': 'i' } },
+            ]}]
 
-                '$or': [
-                    { name: { $regex: searchItem, '$options': 'i' } },
-                    { category: { $regex: searchItem, '$options': 'i' } },
-                ]
+               
 
 
             }).toArray()
