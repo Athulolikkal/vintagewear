@@ -1,16 +1,11 @@
-var express = require('express');
-var router = express.Router();
-const { response } = require('../app');
+const express = require('express');
 const adminHelpers = require('../models/adminhelpers');
 const productHelpers = require('../models/producthelpers');
 const userHelpers = require('../models/userhelpers');
-// var fileUpload=require('express-fileupload');
-const cloudinary = require('../utils/cloudinary')
+
 const multer = require('multer')
 const path = require('path');
-const { resolve } = require('path');
-const { Db } = require('mongodb');
-const adminControllers = require('../controllers/admincontrollers')
+
 
 upload = multer({
   storage: multer.diskStorage({}),

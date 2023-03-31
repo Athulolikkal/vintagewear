@@ -1,10 +1,8 @@
-var express = require('express');
+const express = require('express');
 const { response, route, render } = require('../app');
-var router = express.Router();
 const userHelpers = require('../models/userhelpers');
 const productHelpers = require('../models/producthelpers');
 const adminHelpers = require('../models/adminhelpers');
-const { userDetails } = require('../models/adminhelpers');
 
 require('dotenv').config()
 
@@ -596,6 +594,9 @@ module.exports = {
       await adminHelpers.changeStock(item[i]?.products?.item, stock)
     }
     //end of stock management
+     
+
+
 
 
 
